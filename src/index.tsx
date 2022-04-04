@@ -9,6 +9,7 @@ import {
   Route 
 } from 'react-router-dom'
 import SearchResults from './routes/SearchResults'
+import ShowRecipe from './routes/ShowRecipe'
 
 ReactDOM.render(
   <React.StrictMode>
@@ -16,6 +17,7 @@ ReactDOM.render(
       <Routes>
         <Route path="/" element={ <App /> }>
           <Route path="/search" element={ <SearchResults /> } />
+          <Route path="/recipe/:recipeId" element={ <ShowRecipe />} />
         </Route>
       </Routes>
     </BrowserRouter>
