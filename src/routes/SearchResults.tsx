@@ -7,12 +7,6 @@ import {
 } from 'react-router-dom'
 import { Recipe } from '../types'
 
-interface SearchResponse {
-    data: Recipe[],
-    status: number,
-    message: string,
-}
-
 export default function SearchResults() {
     const [recipes, setRecipes] = useState<Recipe[]>([])
     const [loading, setLoading] = useState(false)
@@ -28,7 +22,7 @@ export default function SearchResults() {
         const query = q.replace(/\s/g, '+')
         const url = baseUrl + '/api/v1/recipes/search/' + query
         fetch(url)
-            .then((res): Promise<SearchResponse> => res.json())
+            .then(res => res.json())
             .then(json => setRecipes(json.data))
             .catch(err => console.log(err))
             .finally(() => setLoading(false))
