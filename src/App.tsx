@@ -4,9 +4,14 @@ import {
   SyntheticEvent,
 } from 'react';
 import './App.css';
+import {
+  Outlet,
+  useNavigate
+} from 'react-router-dom'
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('')
+  const navigate = useNavigate()
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value)
@@ -14,7 +19,7 @@ function App() {
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault()
-    console.log(searchQuery)
+    navigate('/search?q=' + searchQuery)
   }
 
   return (
@@ -34,6 +39,7 @@ function App() {
           Search
         </button>
       </form>
+      <Outlet />
     </div>
   );
 }
