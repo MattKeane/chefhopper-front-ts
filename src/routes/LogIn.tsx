@@ -3,6 +3,8 @@ import {
     ChangeEvent,
     SyntheticEvent, 
 } from 'react'
+import { useDispatch } from 'react-redux'
+import { logInUser } from '../features/user/userSlice'
 
 export default function LogIn() {
     const initialFormState = {
@@ -11,6 +13,8 @@ export default function LogIn() {
     }
 
     const [formState, setFormState] = useState(initialFormState)
+
+    const dispatch = useDispatch()
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setFormState(currentState => ({
@@ -21,7 +25,7 @@ export default function LogIn() {
 
     const handleSubmit = (e: SyntheticEvent) => {
         e.preventDefault()
-        console.log(formState)
+        dispatch(logInUser(formState))
     }
 
     return (

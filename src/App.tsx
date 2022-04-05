@@ -8,10 +8,14 @@ import {
   Outlet,
   useNavigate
 } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { UserState } from './types'
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('')
+  const user = useSelector((state: UserState) => state.user)
   const navigate = useNavigate()
+  console.log(user)
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value)
@@ -24,6 +28,11 @@ function App() {
 
   return (
     <div className="App">
+      {
+        (user && user.user)
+        &&
+        <p>Welcome, { user.user.username }</p>
+      }
       <form onSubmit={ handleSubmit }>
         <label htmlFor="searchField">
           Search:
