@@ -8,19 +8,23 @@ import {
   Routes,
   Route 
 } from 'react-router-dom'
+import store from './features/store'
+import { Provider } from 'react-redux'
 import SearchResults from './routes/SearchResults'
 import ShowRecipe from './routes/ShowRecipe'
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={ <App /> }>
-          <Route path="/search" element={ <SearchResults /> } />
-          <Route path="/recipe/:recipeId" element={ <ShowRecipe />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <Provider store={ store }>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={ <App /> }>
+            <Route path="/search" element={ <SearchResults /> } />
+            <Route path="/recipe/:recipeId" element={ <ShowRecipe />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
