@@ -8,7 +8,9 @@ interface LogInPayload {
     username: string,
     password: string
 }
+
 export const logInUser = createAsyncThunk(
+    // thunk to handle user log ins
     'user/logIn',
     async (payload: LogInPayload, thunkAPI) => {
         const { REACT_APP_API_URL: baseUrl } = process.env
@@ -23,14 +25,17 @@ export const logInUser = createAsyncThunk(
                 },
             })
             if (logInResponse.status === 200) {
+                // fulfill on successful api request
                 console.log('status 200')
                 const logInJson = await logInResponse.json()
                 return logInJson.data
             } else if (logInResponse.status === 401) {
+                // reject with invalid message when credentials are invalid
                 console.log('status 401')
                 return thunkAPI.rejectWithValue('invalid')
             }
         } catch (err) {
+            // reject with error on erros
             return thunkAPI.rejectWithValue('error')
         }
         
@@ -51,7 +56,7 @@ export const userSlice = createSlice({
     extraReducers: builder => {
         builder
             .addCase(logInUser.fulfilled, (state, action) => {
-                console.log('reducer running')
+                // update user on successful login
                 const { username, id, email } = action.payload
                 state.username = username
                 state.id = id
@@ -59,6 +64,7 @@ export const userSlice = createSlice({
                 state.status = 'success'
             })
             .addCase(logInUser.rejected, (state, action) => {
+                // set rejection status on login rejection
                 console.log('Rejected reducer running')
                 if (action.payload === 'invalid') {
                     state.status = 'rejected'

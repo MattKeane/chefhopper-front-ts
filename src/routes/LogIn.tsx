@@ -27,10 +27,13 @@ export default function LogIn() {
 
     useEffect(() => {
         if (userState.status === 'success') {
+            // navigate to home on successful login
             navigate('/')
         } else if (userState.status === 'rejected') {
+            // set invalid credentials message
             setMessage('Invalid username or password')
         } else if (userState.status === 'error') {
+            // set error message
             setMessage('Error logging in')
         }
     }, [userState.status, navigate])
