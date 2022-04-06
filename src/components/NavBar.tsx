@@ -10,7 +10,10 @@ export default function NavBar() {
             {
                 !username
                 &&
-                <Link to='/login'>Log In</Link>
+                <>
+                    <Link to="/login">Log In</Link>
+                    <Link to="/register">Register</Link>
+                </>
             }
         </nav>
     )

@@ -13,6 +13,7 @@ import { Provider } from 'react-redux'
 import SearchResults from './routes/SearchResults'
 import ShowRecipe from './routes/ShowRecipe'
 import LogIn from './routes/LogIn'
+import Register from './routes/Register'
 
 ReactDOM.render(
   <React.StrictMode>
@@ -23,6 +24,7 @@ ReactDOM.render(
             <Route path="/search" element={ <SearchResults /> } />
             <Route path="/recipe/:recipeId" element={ <ShowRecipe />} />
             <Route path="/login" element={ <LogIn /> } />
+            <Route path="/register" element={ <Register /> } />
           </Route>
         </Routes>
       </BrowserRouter>
