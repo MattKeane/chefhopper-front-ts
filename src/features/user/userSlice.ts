@@ -77,6 +77,20 @@ export const registerUser = createAsyncThunk(
     }
 )
 
+// thunk to handle logging out
+export const logOutUser = createAsyncThunk(
+    'user/logout',
+    async thunkAPI => {
+        const { REACT_APP_API_URL: baseUrl } = process.env
+        const url = baseUrl + '/api/v1/users/logout'
+        try {
+            await fetch(url, {credentials: 'include'})
+        } catch (err) {
+            console.log(err)
+        }
+    }
+)
+
 const initialState = {
     username: null,
     email: null,
@@ -121,6 +135,12 @@ export const userSlice = createSlice({
                 } else {
                     state.status = 'error'
                 }
+            })
+            .addCase(logOutUser.fulfilled, state => {
+                state.username = null
+                state.id = null
+                state.email = null
+                state.status = 'idle'
             })
     }
 })

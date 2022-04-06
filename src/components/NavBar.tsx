@@ -8,8 +8,10 @@ export default function NavBar() {
     return (
         <nav>
             {
-                !username
-                &&
+                username
+                ?
+                <Link to="/logout">Log Out</Link>
+                :
                 <>
                     <Link to="/login">Log In</Link>
                     <Link to="/register">Register</Link>
