@@ -19,14 +19,19 @@ export default function LogIn() {
     }
 
     const [formState, setFormState] = useState(initialFormState)
+    const [message, setMessage] = useState('')
     const navigate = useNavigate()
     const userState = useSelector((state: State) => state.user)
 
     const dispatch = useDispatch()
 
     useEffect(() => {
-        if (userState.status === "success") {
+        if (userState.status === 'success') {
             navigate('/')
+        } else if (userState.status === 'rejected') {
+            setMessage('Invalid username or password')
+        } else if (userState.status === 'error') {
+            setMessage('Error logging in')
         }
     }, [userState.status, navigate])
 
@@ -44,6 +49,11 @@ export default function LogIn() {
 
     return (
         <main>
+            {
+                message
+                &&
+                <p>{ message }</p>
+            }
             <form onSubmit={ handleSubmit }>
                 <fieldset>
                     <label htmlFor="username">Username:</label>

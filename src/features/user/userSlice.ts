@@ -22,10 +22,16 @@ export const logInUser = createAsyncThunk(
                     'Content-Type': 'application/json',
                 },
             })
-            const logInJson = await logInResponse.json()
-            return logInJson.data
+            if (logInResponse.status === 200) {
+                console.log('status 200')
+                const logInJson = await logInResponse.json()
+                return logInJson.data
+            } else if (logInResponse.status === 401) {
+                console.log('status 401')
+                return thunkAPI.rejectWithValue('invalid')
+            }
         } catch (err) {
-            console.log(err)
+            return thunkAPI.rejectWithValue('error')
         }
         
     }
@@ -43,13 +49,23 @@ export const userSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: builder => {
-        builder.addCase(logInUser.fulfilled, (state, action) => {
-            const { username, id, email } = action.payload
-            state.username = username
-            state.id = id
-            state.email = email
-            state.status = 'success'
-        })
+        builder
+            .addCase(logInUser.fulfilled, (state, action) => {
+                console.log('reducer running')
+                const { username, id, email } = action.payload
+                state.username = username
+                state.id = id
+                state.email = email
+                state.status = 'success'
+            })
+            .addCase(logInUser.rejected, (state, action) => {
+                console.log('Rejected reducer running')
+                if (action.payload === 'invalid') {
+                    state.status = 'rejected'
+                } else {
+                    state.status = 'error'
+                }
+            })
     }
 })
 
