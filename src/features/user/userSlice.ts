@@ -2,11 +2,7 @@ import {
     createSlice,
     createAsyncThunk 
 } from '@reduxjs/toolkit'
-import { User } from '../../types'
-
-interface UserState {
-    user: User | null
-}
+import { UserState } from '../../types'
 
 interface LogInPayload {
     username: string,
@@ -15,7 +11,6 @@ interface LogInPayload {
 export const logInUser = createAsyncThunk(
     'user/logIn',
     async (payload: LogInPayload, thunkAPI) => {
-        console.log(payload)
         const { REACT_APP_API_URL: baseUrl } = process.env
         const url = baseUrl + '/api/v1/users/login'
         try {
@@ -28,7 +23,6 @@ export const logInUser = createAsyncThunk(
                 },
             })
             const logInJson = await logInResponse.json()
-            console.log(logInJson)
             return logInJson.data
         } catch (err) {
             console.log(err)
@@ -37,10 +31,11 @@ export const logInUser = createAsyncThunk(
     }
 )
 
-
-
 const initialState = {
-    user: null
+    username: null,
+    email: null,
+    id: null,
+    status: 'idle',
 } as UserState
 
 export const userSlice = createSlice({
@@ -49,8 +44,11 @@ export const userSlice = createSlice({
     reducers: {},
     extraReducers: builder => {
         builder.addCase(logInUser.fulfilled, (state, action) => {
-            console.log('extra reducer is running')
-            state.user = action.payload
+            const { username, id, email } = action.payload
+            state.username = username
+            state.id = id
+            state.email = email
+            state.status = 'success'
         })
     }
 })

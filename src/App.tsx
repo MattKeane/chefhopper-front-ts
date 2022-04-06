@@ -1,5 +1,6 @@
 import { 
   useState,
+  useEffect,
   ChangeEvent,
   SyntheticEvent,
 } from 'react';
@@ -9,17 +10,19 @@ import {
   useNavigate
 } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { UserState } from './types'
+import { State } from './types'
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('')
-  const user = useSelector((state: UserState) => state.user)
+  const userState = useSelector((state: State) => state.user)
   const navigate = useNavigate()
-  console.log(user)
+  console.log(userState)
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value)
   }
+
+  useEffect(() => console.log(userState))
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault()
@@ -29,9 +32,9 @@ function App() {
   return (
     <div className="App">
       {
-        (user && user.user)
+        userState.username
         &&
-        <p>Welcome, { user.user.username }</p>
+        <p>Welcome, { userState.username }</p>
       }
       <form onSubmit={ handleSubmit }>
         <label htmlFor="searchField">

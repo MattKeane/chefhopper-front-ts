@@ -11,8 +11,13 @@ export interface User {
     id: number,
 }
 
- export interface UserState {
-    user: {
-        user: User | null
-    }    
+export interface UserState {
+    username: string | null,
+    email: string | null,
+    id: number | null,
+    status: string,
+}
+
+export interface State {
+    user: UserState
 }
