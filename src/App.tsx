@@ -10,6 +10,7 @@ import {
 } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { State } from './types'
+import NavBar from './components/NavBar'
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('')
@@ -27,6 +28,7 @@ function App() {
 
   return (
     <div className="App">
+      <NavBar />
       {
         userState.username
         &&
