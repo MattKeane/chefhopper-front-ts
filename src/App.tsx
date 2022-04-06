@@ -1,6 +1,5 @@
 import { 
   useState,
-  useEffect,
   ChangeEvent,
   SyntheticEvent,
 } from 'react';
@@ -16,13 +15,10 @@ function App() {
   const [searchQuery, setSearchQuery] = useState('')
   const userState = useSelector((state: State) => state.user)
   const navigate = useNavigate()
-  console.log(userState)
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value)
   }
-
-  useEffect(() => console.log(userState))
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault()

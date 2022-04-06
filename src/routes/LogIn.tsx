@@ -1,10 +1,16 @@
 import { 
     useState,
+    useEffect,
     ChangeEvent,
     SyntheticEvent, 
 } from 'react'
-import { useDispatch } from 'react-redux'
+import { 
+    useDispatch,
+    useSelector 
+} from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { logInUser } from '../features/user/userSlice'
+import { State } from '../types'
 
 export default function LogIn() {
     const initialFormState = {
@@ -13,8 +19,16 @@ export default function LogIn() {
     }
 
     const [formState, setFormState] = useState(initialFormState)
+    const navigate = useNavigate()
+    const userState = useSelector((state: State) => state.user)
 
     const dispatch = useDispatch()
+
+    useEffect(() => {
+        if (userState.status === "success") {
+            navigate('/')
+        }
+    }, [userState.status, navigate])
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setFormState(currentState => ({
