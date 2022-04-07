@@ -3,11 +3,21 @@ import {
     useEffect,
 } from 'react'
 import { useParams } from 'react-router-dom'
-import { Recipe } from '../types'
+import { 
+    useSelector,
+    useDispatch, 
+} from 'react-redux'
+import { 
+    Recipe,
+    State, 
+} from '../types'
+import { saveRecipe } from '../features/savedRecipes/savedRecipesSlice'
 
 export default function ShowRecipe() {
     const [recipe, setRecipe] = useState<Recipe | null>(null)
+    const { username } = useSelector((state: State) => state.user)
     const { recipeId } = useParams()
+    const dispatch = useDispatch()
 
     useEffect(() => {
         const { REACT_APP_API_URL: baseUrl } = process.env
@@ -18,6 +28,12 @@ export default function ShowRecipe() {
             .catch(err => console.log(err))
     }, [recipeId])
 
+    const handleClick = () => {
+        if (recipeId) {
+            dispatch(saveRecipe(recipeId))
+        }
+    }
+
     return(
         <main>
             {
@@ -25,6 +41,11 @@ export default function ShowRecipe() {
                 &&
                 <>
                     <h1>{ recipe.title }</h1>
+                    {
+                        username
+                        &&
+                        <button onClick={ handleClick }>Save Recipe</button>
+                    }
                     <ul>
                         {
                             recipe.ingredients.map((ingredient, i) => <li key={ i }>{ ingredient }</li>)
