@@ -3,7 +3,8 @@ import {
     useEffect,
 } from 'react'
 import {
-    useSearchParams
+    useSearchParams,
+    Link,
 } from 'react-router-dom'
 import { Recipe } from '../types'
 
@@ -14,7 +15,14 @@ export default function SearchResults() {
     const [searchParams, setSearchParams] = useSearchParams()
     const q = searchParams.get('q') || ''
 
-    const showRecipes = recipes.map(recipe => <li key={ recipe.id }>{ recipe.title }</li>)
+    const showRecipes = recipes.map(recipe => {
+        const recipeUrl = '/recipe/' + recipe.id
+        return (
+            <li key={ recipe.id }>
+                <Link to={ recipeUrl }>{ recipe.title }</Link>
+            </li>
+        )
+    })
 
     useEffect(() => {
         setLoading(true)
