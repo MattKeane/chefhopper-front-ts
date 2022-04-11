@@ -10,7 +10,10 @@ export default function NavBar() {
             {
                 username
                 ?
-                <Link to="/logout">Log Out</Link>
+                <>
+                    <Link to="/saved">My Recipes</Link>
+                    <Link to="/logout">Log Out</Link>
+                </>
                 :
                 <>
                     <Link to="/login">Log In</Link>

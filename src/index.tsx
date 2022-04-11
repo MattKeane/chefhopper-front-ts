@@ -15,6 +15,7 @@ import ShowRecipe from './routes/ShowRecipe'
 import LogIn from './routes/LogIn'
 import Register from './routes/Register'
 import LogOut from './routes/LogOut'
+import SavedRecipes from './routes/SavedRecipes'
 
 ReactDOM.render(
   <React.StrictMode>
@@ -27,6 +28,7 @@ ReactDOM.render(
             <Route path="/login" element={ <LogIn /> } />
             <Route path="/register" element={ <Register /> } />
             <Route path="/logout" element={ <LogOut /> } />
+            <Route path="/saved" element={ <SavedRecipes /> } />
           </Route>
         </Routes>
       </BrowserRouter>
