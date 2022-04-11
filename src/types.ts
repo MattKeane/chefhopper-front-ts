@@ -18,6 +18,12 @@ export interface UserState {
     status: string,
 }
 
+export interface SavedRecipesState {
+    recipes: Recipe[],
+    status: string,
+}
+
 export interface State {
-    user: UserState
+    user: UserState,
+    savedRecipes: SavedRecipesState,
 }
