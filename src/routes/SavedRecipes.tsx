@@ -3,7 +3,10 @@ import {
     useSelector,
     useDispatch
 } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { 
+    useNavigate,
+    Link 
+} from 'react-router-dom'
 import { getSavedRecipes } from '../features/savedRecipes/savedRecipesSlice'
 import { State } from '../types'
 
@@ -21,9 +24,14 @@ export default function SavedRecipes() {
         }
     }, [user.username, navigate, dispatch])
 
-    const showSavedRecipes = savedRecipes.map(recipe => (
-        <li key={ recipe.id }>{ recipe.title }</li>
-    ))
+    const showSavedRecipes = savedRecipes.map(recipe => {
+        const url = '/recipe/' + recipe.id
+        return (
+            <li key={ recipe.id }>
+                <Link to={ url }>{ recipe.title }</Link>
+            </li>
+        )}
+    )
 
     return (
         <ul>
