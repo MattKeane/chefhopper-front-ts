@@ -16,6 +16,7 @@ import { saveRecipe } from '../features/savedRecipes/savedRecipesSlice'
 export default function ShowRecipe() {
     const [recipe, setRecipe] = useState<Recipe | null>(null)
     const { username } = useSelector((state: State) => state.user)
+    const savedRecipes = useSelector((state: State) => state.savedRecipes.recipes)
     const { recipeId } = useParams()
     const dispatch = useDispatch()
 
@@ -34,6 +35,13 @@ export default function ShowRecipe() {
         }
     }
 
+    const showSaveRecipeButton = 
+        username 
+        && 
+        recipe 
+        && 
+        !savedRecipes.find(savedRecipe => savedRecipe.id === recipe.id)
+
     return(
         <main>
             {
@@ -42,7 +50,7 @@ export default function ShowRecipe() {
                 <>
                     <h1>{ recipe.title }</h1>
                     {
-                        username
+                        showSaveRecipeButton
                         &&
                         <button onClick={ handleClick }>Save Recipe</button>
                     }
