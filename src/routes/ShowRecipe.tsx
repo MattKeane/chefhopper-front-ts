@@ -12,6 +12,7 @@ import {
     State, 
 } from '../types'
 import { saveRecipe } from '../features/savedRecipes/savedRecipesSlice'
+import SearchBar from '../components/SearchBar'
 
 export default function ShowRecipe() {
     const [recipe, setRecipe] = useState<Recipe | null>(null)
@@ -43,7 +44,8 @@ export default function ShowRecipe() {
         !savedRecipes.find(savedRecipe => savedRecipe.id === recipe.id)
 
     return(
-        <main>
+        <>
+            <SearchBar />
             {
                 recipe
                 &&
@@ -66,6 +68,6 @@ export default function ShowRecipe() {
                     </ol>
                 </>
             }
-        </main>
+        </>
     )
 }

@@ -7,6 +7,7 @@ import {
     Link,
 } from 'react-router-dom'
 import { Recipe } from '../types'
+import SearchBar from '../components/SearchBar'
 
 export default function SearchResults() {
     const [recipes, setRecipes] = useState<Recipe[]>([])
@@ -37,7 +38,8 @@ export default function SearchResults() {
     }, [q])
 
     return (
-        <main>
+        <>
+            <SearchBar />
             {
                 loading
                 ?
@@ -47,6 +49,6 @@ export default function SearchResults() {
                     { showRecipes }
                 </ul>
             }           
-        </main>
+        </>
     )
 }

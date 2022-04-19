@@ -9,6 +9,7 @@ import {
 } from 'react-router-dom'
 import { getSavedRecipes } from '../features/savedRecipes/savedRecipesSlice'
 import { State } from '../types'
+import SearchBar from '../components/SearchBar'
 
 export default function SavedRecipes() {
     const savedRecipes = useSelector((state: State) => state.savedRecipes.recipes)
@@ -34,8 +35,11 @@ export default function SavedRecipes() {
     )
 
     return (
-        <ul>
-            { showSavedRecipes }
-        </ul>
+        <>
+            <SearchBar />
+            <ul>
+                { showSavedRecipes }
+            </ul>
+        </>
     )
 }

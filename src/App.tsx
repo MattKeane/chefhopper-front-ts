@@ -34,22 +34,9 @@ function App() {
         &&
         <p>Welcome, { userState.username }</p>
       }
-      <form onSubmit={ handleSubmit }>
-        <label htmlFor="searchField">
-          Search:
-        </label>
-        <input
-          type="text"
-          value={ searchQuery }
-          name="searchField"
-          id="searchField"
-          onChange={ handleChange }
-        />
-        <button>
-          Search
-        </button>
-      </form>
-      <Outlet />
+      <main>
+        <Outlet />
+      </main>
     </div>
   );
 }

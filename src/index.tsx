@@ -16,6 +16,7 @@ import LogIn from './routes/LogIn'
 import Register from './routes/Register'
 import LogOut from './routes/LogOut'
 import SavedRecipes from './routes/SavedRecipes'
+import SearchBar from './components/SearchBar'
 
 ReactDOM.render(
   <React.StrictMode>
@@ -23,6 +24,7 @@ ReactDOM.render(
       <BrowserRouter>
         <Routes>
           <Route path="/" element={ <App /> }>
+            <Route path="/" element={ <SearchBar /> } />
             <Route path="/search" element={ <SearchResults /> } />
             <Route path="/recipe/:recipeId" element={ <ShowRecipe />} />
             <Route path="/login" element={ <LogIn /> } />
