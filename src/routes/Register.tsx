@@ -8,9 +8,24 @@ import {
     useDispatch,
     useSelector, 
 } from 'react-redux'
+import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import { registerUser } from '../features/user/userSlice'
 import { State } from '../types'
+
+const Form = styled.form`
+    margin: 0 auto;
+    max-width: 300px;
+
+    fieldset {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    label {
+        text-align: left;
+    }
+`
 
 export default function Register() {
     const initialFormState = {
@@ -60,12 +75,13 @@ export default function Register() {
 
     return (
         <main>
+            <h2>Register</h2>
             {
                 message
                 &&
                 <p>{ message }</p>
             }
-            <form onSubmit={ handleSubmit }>
+            <Form onSubmit={ handleSubmit }>
                 <fieldset>
                     <label htmlFor="username">
                         Username:
@@ -115,7 +131,7 @@ export default function Register() {
                     />
                 </fieldset>
                 <button>Register</button>
-            </form>
+            </Form>
         </main>
     )
 }

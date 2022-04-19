@@ -9,8 +9,19 @@ import {
     useSelector 
 } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
 import { logInUser } from '../features/user/userSlice'
 import { State } from '../types'
+
+const Form = styled.form`
+    margin: 0 auto;
+    max-width: 300px;
+
+    fieldset {
+        display: flex;
+        justify-content: space-between;
+    }
+`
 
 export default function LogIn() {
     const initialFormState = {
@@ -51,13 +62,14 @@ export default function LogIn() {
     }
 
     return (
-        <main>
+        <>
+            <h2>Log In</h2>
             {
                 message
                 &&
                 <p>{ message }</p>
             }
-            <form onSubmit={ handleSubmit }>
+            <Form onSubmit={ handleSubmit }>
                 <fieldset>
                     <label htmlFor="username">Username:</label>
                     <input
@@ -79,7 +91,7 @@ export default function LogIn() {
                     />
                 </fieldset>
                 <button>Log In</button>
-            </form>
-        </main>
+            </Form>
+        </>
     )
 }

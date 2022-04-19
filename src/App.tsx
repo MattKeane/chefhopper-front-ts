@@ -9,6 +9,7 @@ function App() {
 
   return (
     <div className="App">
+      <h1>ChefHopper</h1>
       <NavBar />
       {
         userState.username

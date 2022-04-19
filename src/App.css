@@ -1,7 +1,45 @@
 body {
   font-family: 'Montserrat', sans-serif;
+  background-color: rgb(200, 255, 200);
+}
+
+.App {
+  width: 100%;
+  text-align: center;
 }
 
 fieldset {
   border: 0;
 }
+
+a:visited {
+  color: black;
+}
+
+a:hover {
+  color: blue;
+}
+
+button {
+  font-family: inherit;
+  background-color: #eee;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 5px 7px;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #333;
+    color: rgb(200, 255, 200)
+  }
+
+  a:visited {
+    color: rgb(200, 255, 200);
+  }
+
+  a:hover {
+    color: lavender;
+  }
+}
+

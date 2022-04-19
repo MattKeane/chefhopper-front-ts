@@ -8,6 +8,27 @@ import {
 } from 'react-router-dom'
 import { Recipe } from '../types'
 import SearchBar from '../components/SearchBar'
+import styled from 'styled-components'
+
+const Ul = styled.ul`
+    list-style: none;
+    text-align: left;
+    display: inline-block;
+    margin: 0 auto;
+
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    li {
+        margin: 2px;
+    }
+`
 
 export default function SearchResults() {
     const [recipes, setRecipes] = useState<Recipe[]>([])
@@ -39,15 +60,16 @@ export default function SearchResults() {
 
     return (
         <>
+            <h2>Search Results</h2>
             <SearchBar />
             {
                 loading
                 ?
                 <p>Loading…</p>
                 :
-                <ul>
+                <Ul>
                     { showRecipes }
-                </ul>
+                </Ul>
             }           
         </>
     )

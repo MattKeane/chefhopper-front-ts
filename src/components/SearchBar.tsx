@@ -6,6 +6,26 @@ import {
 import {
     useNavigate
 } from 'react-router-dom'
+import styled from 'styled-components'
+
+const Form = styled.form`
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 500px;
+
+    button {
+        margin: 5px;
+        align-self: center;
+    }
+
+    input {
+        border: 0;
+        padding: 3px;
+        border-radius: 8px;
+    }
+`
 
 
 export default function SearchBar() {
@@ -22,20 +42,18 @@ export default function SearchBar() {
     }
 
     return (
-        <form onSubmit={ handleSubmit }>
-            <label htmlFor="searchField">
-            Search:
-            </label>
+        <Form onSubmit={ handleSubmit }>
             <input
-            type="text"
-            value={ searchQuery }
-            name="searchField"
-            id="searchField"
-            onChange={ handleChange }
+                type="text"
+                value={ searchQuery }
+                name="searchField"
+                id="searchField"
+                onChange={ handleChange }
+                placeholder="Search for a new recipe"
             />
             <button>
-            Search
+                Search
             </button>
-        </form>
+        </Form>
     )
 }

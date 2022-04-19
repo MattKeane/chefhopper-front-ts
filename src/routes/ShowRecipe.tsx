@@ -7,12 +7,27 @@ import {
     useSelector,
     useDispatch, 
 } from 'react-redux'
+import styled from 'styled-components'
 import { 
     Recipe,
     State, 
 } from '../types'
 import { saveRecipe } from '../features/savedRecipes/savedRecipesSlice'
 import SearchBar from '../components/SearchBar'
+
+const Ul = styled.ul`
+    display: inline-block;
+    text-align: left;
+`
+
+const Ol = styled.ol`
+    display: inline-block;
+    text-align: left;
+
+    li {
+        margin: 3px;
+    }
+`
 
 export default function ShowRecipe() {
     const [recipe, setRecipe] = useState<Recipe | null>(null)
@@ -49,23 +64,23 @@ export default function ShowRecipe() {
             {
                 recipe
                 &&
-                <>
-                    <h1>{ recipe.title }</h1>
-                    {
+                <>                  
+                    <h2>{ recipe.title }</h2>
+                     {
                         showSaveRecipeButton
                         &&
-                        <button onClick={ handleClick }>Save Recipe</button>
+                        <div><button onClick={ handleClick }>Save Recipe</button></div>
                     }
-                    <ul>
+                    <Ul>
                         {
                             recipe.ingredients.map((ingredient, i) => <li key={ i }>{ ingredient }</li>)
                         }
-                    </ul>
-                    <ol>
+                    </Ul>
+                    <Ol>
                         {
                             recipe.instructions.map((instruction, i) => <li key={ i }>{ instruction }</li>)
                         }
-                    </ol>
+                    </Ol>
                 </>
             }
         </>

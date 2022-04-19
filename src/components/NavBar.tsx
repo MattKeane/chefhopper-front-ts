@@ -1,25 +1,61 @@
 import { useSelector } from 'react-redux'
 import { State } from '../types'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
+import styled from 'styled-components'
+
+const Nav = styled.nav`
+    padding: 5px 7px;
+    display: flex;
+    justify-content: space-around;
+    box-shadow: 0px 2px 4px #666;
+
+    a {
+        text-decoration: none;
+        padding: 0 5px;
+        border-left: 1px solid #666;
+        border-right: 1px solid #666;
+    }
+
+    li {
+        list-style: none;
+    }
+
+    .current {
+        li {
+            border-bottom: 1px solid black;
+        }
+    }
+
+    @media (prefers-color-scheme: dark) {
+        .current {
+            li {
+                border-bottom: 1px solid rgb(200, 255, 200);
+            }
+        }
+    }
+`
 
 export default function NavBar() {
     const { username } = useSelector((state: State) => state.user)
 
+    const assignActiveClass = ({ isActive }: { isActive: boolean }) => isActive ? "current" : undefined
+
     return (
-        <nav>
+        <Nav>
+            <NavLink to="/" className={ assignActiveClass }><li>Home</li></NavLink>
             {
                 username
                 ?
                 <>
-                    <Link to="/saved">My Recipes</Link>
-                    <Link to="/logout">Log Out</Link>
+                    <NavLink to="/saved" className={ assignActiveClass }><li>My Recipes</li></NavLink>
+                    <NavLink to="/logout"><li>Log Out</li></NavLink>
                 </>
                 :
                 <>
-                    <Link to="/login">Log In</Link>
-                    <Link to="/register">Register</Link>
+                    <NavLink to="/login" className={ assignActiveClass }><li>Log In</li></NavLink>
+                    <NavLink to="/register" className={ assignActiveClass }><li>Register</li></NavLink>
                 </>
             }
-        </nav>
+        </Nav>
     )
 }
