@@ -12,6 +12,10 @@ fieldset {
   border: 0;
 }
 
+a {
+  color: inherit;
+}
+
 a:visited {
   color: black;
 }
