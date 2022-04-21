@@ -6,7 +6,7 @@ import styled from 'styled-components'
 const Nav = styled.nav`
     padding: 5px 7px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     box-shadow: 0px 2px 4px #666;
 
     a {
@@ -35,6 +35,10 @@ const Nav = styled.nav`
     }
 `
 
+const UserBox = styled.div`
+    display: flex
+`
+
 export default function NavBar() {
     const { username } = useSelector((state: State) => state.user)
 
@@ -43,6 +47,7 @@ export default function NavBar() {
     return (
         <Nav>
             <NavLink to="/" className={ assignActiveClass }><li>Home</li></NavLink>
+            <UserBox>
             {
                 username
                 ?
@@ -56,6 +61,7 @@ export default function NavBar() {
                     <NavLink to="/register" className={ assignActiveClass }><li>Register</li></NavLink>
                 </>
             }
+            </UserBox>
         </Nav>
     )
 }
