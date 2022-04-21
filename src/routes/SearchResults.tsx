@@ -53,7 +53,10 @@ export default function SearchResults() {
         const url = baseUrl + '/api/v1/recipes/search/' + query
         fetch(url)
             .then(res => res.json())
-            .then(json => setRecipes(json.data))
+            .then(json => {
+                setRecipes(json.data)
+                console.log(json)
+            })
             .catch(err => console.log(err))
             .finally(() => setLoading(false))
     }, [q])
