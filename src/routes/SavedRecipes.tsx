@@ -7,9 +7,14 @@ import {
     useNavigate,
     Link 
 } from 'react-router-dom'
+import styled from 'styled-components'
 import { getSavedRecipes } from '../features/savedRecipes/savedRecipesSlice'
 import { State } from '../types'
 import SearchBar from '../components/SearchBar'
+
+const Ul = styled.ul`
+    list-style: none;
+`
 
 export default function SavedRecipes() {
     const savedRecipes = useSelector((state: State) => state.savedRecipes.recipes)
@@ -37,9 +42,9 @@ export default function SavedRecipes() {
     return (
         <>
             <SearchBar />
-            <ul>
+            <Ul>
                 { showSavedRecipes }
-            </ul>
+            </Ul>
         </>
     )
 }
