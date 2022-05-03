@@ -16,13 +16,18 @@ import { saveRecipe } from '../features/savedRecipes/savedRecipesSlice'
 import SearchBar from '../components/SearchBar'
 
 const Ul = styled.ul`
-    display: inline-block;
+    margin: 10px auto;
     text-align: left;
+    max-width: 800px;
+    li {
+        margin: 3px;
+    }
 `
 
 const Ol = styled.ol`
-    display: inline-block;
+    margin: 10px auto;
     text-align: left;
+    max-width: 800px;
 
     li {
         margin: 3px;
